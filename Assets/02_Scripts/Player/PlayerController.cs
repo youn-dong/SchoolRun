@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour
         }
         if (curMovementInput.y < 0.0f) // S 키 → 뒤로 이동 + 180도 회전
         {
-            rotationSpeed = 0.5f;
             transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + 180, 0);
         }
         //if(dir != Vector3.zero)
@@ -110,6 +109,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnJump(InputAction.CallbackContext context)
     {
+        Debug.Log("Jump");
         if(context.phase == InputActionPhase.Started&&isGrounded)
         {
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
