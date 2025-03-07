@@ -15,20 +15,34 @@ public class Interaction : MonoBehaviour
     private IInteractable curInteractable;
 
     public TextMeshProUGUI promptTxt;
-    private Camera camera;
-    void Start()
-    {
-        camera = Camera.main;
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.time -lastCheckTime > checkRate)
+        CheckInteraction();
+    }
+    private void SetPromptText()
+    {
+        promptTxt.gameObject.SetActive(true);
+        promptTxt.text = curInteractable.GetInteractPrompt();
+    }
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started && curInteractable != null)
+        {
+            curInteractable.OnInteract();
+            curInteractGameObject = null;
+            curInteractable = null;
+            promptTxt.gameObject.SetActive(false);
+        }
+    }
+    public void CheckInteraction()
+    {
+        if (Time.time - lastCheckTime > checkRate)
         {
             lastCheckTime = Time.time;
 
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
@@ -49,19 +63,5 @@ public class Interaction : MonoBehaviour
             }
         }
     }
-    private void SetPromptText()
-    {
-        promptTxt.gameObject.SetActive(true);
-        promptTxt.text = curInteractable.GetInteractPrompt();
-    }
-    public void OnInteractInput(InputAction.CallbackContext context)
-    {
-        if(context.phase == InputActionPhase.Started && curInteractable != null)
-        {
-            curInteractable.OnInteract();
-            curInteractGameObject = null;
-            curInteractable = null;
-            promptTxt.gameObject.SetActive(false);
-        }
-    }
 }
+

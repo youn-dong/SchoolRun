@@ -18,6 +18,7 @@ public class ItemObject : MonoBehaviour, IInteractable
     }
     public void OnInteract()
     {
+        Debug.Log("상호작용중");
         ChracterManager.Instance.Player.itemData = data;
         ChracterManager.Instance.Player.addItem?.Invoke();
         Destroy(gameObject);

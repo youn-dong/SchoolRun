@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void Update()
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = GroundCheck();
         animator.SetBool("Grounded", isGrounded);
     }
-    void FixedUpdate() //¹°¸®¿¬»êÀº FixedUpdate »ı¸íÁÖ±âÇÔ¼ö¿¡¼­ ÇÏ´Â°ÍÀÌ À¯¸®.
+    void FixedUpdate() //ë¬¼ë¦¬ì—°ì‚°ì€ FixedUpdate ìƒëª…ì£¼ê¸°í•¨ìˆ˜ì—ì„œ í•˜ëŠ”ê²ƒì´ ìœ ë¦¬.
     {
         Move();
     }
@@ -59,15 +59,15 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
 
-        // 1. Ä³¸¯ÅÍ Á¤ÁöÇÒ¶§(Ä³¸¯ÅÍ°¡ ¹Ù¶óº¸°í ÀÖ´Â ¹æÇâÀ¸·Î) È¸Àü°ª
-        // 2. Ä³¸¯ÅÍ°¡ ÀÌµ¿ÇÒ ¶§ 
+        // 1. ìºë¦­í„° ì •ì§€í• ë•Œ(ìºë¦­í„°ê°€ ë°”ë¼ë³´ê³  ìˆëŠ” ë°©í–¥ìœ¼ë¡œ) íšŒì „ê°’
+        // 2. ìºë¦­í„°ê°€ ì´ë™í•  ë•Œ 
 
        //  Debug.Log(curMovementInput);
         // Vector3 dir = transform.forward * curMovementInput;// .y + transform.right * curMovementInput.x;
         // Vector3 dir = (transform.forward * curMovementInput.y+transform.right*curMovementInput.x).normalized;
         Vector3 dir = transform.forward*curMovementInput.y;
         dir *= moveSpeed;
-        dir.y = _rigidbody.velocity.y; //Á¡ÇÁ½Ã Áß·ÂÀ» À¯ÁöÇØÁÖ±â À§ÇØ¼­.
+        dir.y = _rigidbody.velocity.y; //ì í”„ì‹œ ì¤‘ë ¥ì„ ìœ ì§€í•´ì£¼ê¸° ìœ„í•´ì„œ.
 
         _rigidbody.velocity = dir;
         if(curMovementInput.x > 0.0f)
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.eulerAngles -= Time.deltaTime * rotationSpeed * Vector3.up;
         }
-        if (curMovementInput.y < 0.0f) // S Å° ¡æ µÚ·Î ÀÌµ¿ + 180µµ È¸Àü
+        if (curMovementInput.y < 0.0f) // S í‚¤ â†’ ë’¤ë¡œ ì´ë™ + 180ë„ íšŒì „
         {
             transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + 180, 0);
         }
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Performed)
         {
-            Debug.Log("¿òÁ÷¿©¶ó");
+            Debug.Log("ì›€ì§ì—¬ë¼");
             curMovementInput = context.ReadValue<Vector2>();
             animator.SetFloat("MoveSpeed", moveSpeed);
         }
@@ -140,11 +140,11 @@ public class PlayerController : MonoBehaviour
         //if (curMovementInput.magnitude > 0.1f)
         //{
         //    float targetAngle = Mathf.Atan2() * Mathf.Rad2Deg;
-        //    //tan¸¦ ÅëÇØ¼­ ±¸ÇÑ °ª¿¡ °¢À» °öÇØ¼­ ÀÌµ¿ ¹æÇâÀÇ °¢À» °è»ê
+        //    //tanë¥¼ í†µí•´ì„œ êµ¬í•œ ê°’ì— ê°ì„ ê³±í•´ì„œ ì´ë™ ë°©í–¥ì˜ ê°ì„ ê³„ì‚°
         //    Quaternion targetRot = Quaternion.Euler(0, targetAngle, 0);
 
         //    transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
-        //    //LerpÇÔ¼ö¸¦ ÀÌ¿ëÇØ¼­ ¿øÇÏ´Â targetAngle±îÁö rotationspeed¿Í ½Ã°£¿¡ ¸ÂÃç ÀÚ¿¬½º·´°Ô È¸ÀüÇÏµµ·Ï
+        //    //Lerpí•¨ìˆ˜ë¥¼ ì´ìš©í•´ì„œ ì›í•˜ëŠ” targetAngleê¹Œì§€ rotationspeedì™€ ì‹œê°„ì— ë§ì¶° ìì—°ìŠ¤ëŸ½ê²Œ íšŒì „í•˜ë„ë¡
         //}
     }
     public void OnLook(InputAction.CallbackContext context)
