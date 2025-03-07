@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
@@ -23,28 +24,44 @@ public class Interaction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        RaycastHit hit;
+        if(Time.time -lastCheckTime > checkRate)
+        {
+            lastCheckTime = Time.time;
 
-        if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
-        {
-            if(hit.collider.gameObject != curInteractGameObject)
+            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
             {
-                curInteractGameObject = hit.collider.gameObject;
-                curInteractable = hit.collider.GetComponent<IInteractable>();
-                //Ray¿¡ ´ã°ÜÀÖ´Â °ÔÀÓ¿ÀºêÁ§Æ®°¡ »õ·Î¿î °Å¶ó¸é ÇÁ·ÒÆ÷Æ®¸¦ Ãâ·ÂÇØÁà¶ó.
+                if (hit.collider.gameObject != curInteractGameObject)
+                {
+                    curInteractGameObject = hit.collider.gameObject;
+                    curInteractable = hit.collider.GetComponent<IInteractable>();
+                    SetPromptText();
+                    //Rayì— ë‹´ê²¨ìˆëŠ” ê²Œì„ì˜¤ë¸Œì íŠ¸ê°€ ìƒˆë¡œìš´ ê±°ë¼ë©´ í”„ë¡¬í¬íŠ¸ë¥¼ ì¶œë ¥í•´ì¤˜ë¼.
+                }
             }
-        }
-        else
-        {
-            curInteractable = null;
-            curInteractGameObject = null;
-            promptTxt.gameObject.SetActive(false);
+            else
+            {
+                curInteractable = null;
+                curInteractGameObject = null;
+                promptTxt.gameObject.SetActive(false);
+            }
         }
     }
     private void SetPromptText()
     {
         promptTxt.gameObject.SetActive(true);
         promptTxt.text = curInteractable.GetInteractPrompt();
+    }
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started && curInteractable != null)
+        {
+            curInteractable.OnInteract();
+            curInteractGameObject = null;
+            curInteractable = null;
+            promptTxt.gameObject.SetActive(false);
+        }
     }
 }

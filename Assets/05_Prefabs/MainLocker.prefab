@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8584990369932156183}
   - component: {fileID: 2228736405989410109}
   - component: {fileID: 2815856322820232120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MainLocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

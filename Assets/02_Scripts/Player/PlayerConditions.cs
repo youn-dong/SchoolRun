@@ -27,6 +27,6 @@ public class PlayerConditions : MonoBehaviour
     }
     public void Die()
     {
-        Debug.Log("Á×¾úÀ½.");
+        Debug.Log("ì£½ì—ˆìŒ.");
     }
 }

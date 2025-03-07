@@ -28,7 +28,7 @@ public class DoorController : MonoBehaviour
     {
         if (others.gameObject.CompareTag("Player"))
         {
-            Debug.Log("πÆ ø≠æÓ∂Û");
+            Debug.Log("Î¨∏ Ïó¥Ïñ¥Îùº");
             ToggleDoor();
         }
     }
