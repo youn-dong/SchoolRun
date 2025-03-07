@@ -3,12 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
-{
-    Usable,
-    Display,
-    Consumable
-}
 public enum ConsumableType
 {
     Health,
@@ -26,7 +20,6 @@ public class ItemData : ScriptableObject
     [Header("Info")]
     public string ItemName;
     public string description;
-    public ItemType itemType;
     public Mesh icon;
     public GameObject dropPrefab;
 

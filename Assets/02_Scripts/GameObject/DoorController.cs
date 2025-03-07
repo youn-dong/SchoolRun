@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class DoorController : MonoBehaviour
+public class DoorController : MonoBehaviour, IInterEnvironment
 {
     private bool isOpen = false;
     private Animator anim;
@@ -14,22 +15,17 @@ public class DoorController : MonoBehaviour
     }
     public void ToggleDoor()
     {
-        if (isOpen)
-        {
-            anim.SetBool("DoorOpen",false);
-        }
-        else
-        {
-            anim.SetBool("DoorOpen",true);
-        }
         isOpen = !isOpen;
+
+        anim.SetBool("DoorOpen", isOpen);
+        Debug.Log("문상태: " + (isOpen ? "열림" : "닫힘"));
+
+
+
     }
-    private void OnTriggerEnter(Collider others)
+    public void OnInteractEnvironment()
     {
-        if (others.gameObject.CompareTag("Player"))
-        {
             Debug.Log("문 열어라");
             ToggleDoor();
-        }
     }
 }

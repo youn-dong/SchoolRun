@@ -16,11 +16,11 @@ public class PlayerConditions : MonoBehaviour
         hunger.SubStract(hunger.passiveValue * Time.deltaTime);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
 
-        if(hunger.curValue <0f)
+        if(hunger.curValue <=0f)
         {
             health.SubStract(noHungerHealthDecay * Time.deltaTime);
         }
-        if(health.curValue < 0f)
+        if(health.curValue <= 0f)
         {
             Die();
         }

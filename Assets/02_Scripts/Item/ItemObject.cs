@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IInterEnvironment
+{
+    void OnInteractEnvironment();
+}
+
 public interface IInteractable
 {
     public string GetInteractPrompt();
@@ -13,8 +18,7 @@ public class ItemObject : MonoBehaviour, IInteractable
     public ItemData data;
    public string GetInteractPrompt()
     {
-        string str = $"{data.ItemName}\n{data.description}";
-        return str;
+        return $"{data.ItemName}\n{data.description}";
     }
     public void OnInteract()
     {
