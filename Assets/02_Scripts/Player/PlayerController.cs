@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         // 1. 캐릭터 정지할때(캐릭터가 바라보고 있는 방향으로) 회전값
         // 2. 캐릭터가 이동할 때 
 
-        Debug.Log(curMovementInput);
+       //  Debug.Log(curMovementInput);
         // Vector3 dir = transform.forward * curMovementInput;// .y + transform.right * curMovementInput.x;
         // Vector3 dir = (transform.forward * curMovementInput.y+transform.right*curMovementInput.x).normalized;
         Vector3 dir = transform.forward*curMovementInput.y;
