@@ -82,9 +82,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Jump");
         if(context.phase == InputActionPhase.Started&&isGrounded)
         {
+            if(ChracterManager.Instance.Player.conditions.stamina.curValue <5f) //점프할 수 있는 스태미나가 없는 경우
+            {
+                Debug.Log("Jump할 Stamina가 없습니다.");
+                return;
+            }
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
-
             ChracterManager.Instance.Player.conditions.DecreaseStamina(5f); //점프시 스태미너가 5씩 감소하도록 
         }
     }

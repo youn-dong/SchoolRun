@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerConditions : MonoBehaviour
 {
     public UICondition uicondition;
-    Conditions health { get { return uicondition.health; } }
-    Conditions hunger { get { return uicondition.hunger; } }
-    Conditions stamina { get { return uicondition.stamina; } }
+    public Conditions health { get { return uicondition.health; } }
+    public Conditions hunger { get { return uicondition.hunger; } }
+    public Conditions stamina { get { return uicondition.stamina; } }
 
     [Header("체력감소속도")]
     public float noHungerHealthDecay;
