@@ -26,6 +26,12 @@ public class PlayerConditions : MonoBehaviour
             Die();
         }
     }
+    public void DecreaseStamina(float amount)
+    {
+        stamina.SubStract(amount);
+        if (stamina.curValue <= 0f)
+            stamina.curValue = 0;
+    }
     public void Die()
     {
         Debug.Log("죽었음.");

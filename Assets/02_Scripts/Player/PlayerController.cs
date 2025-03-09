@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
     }
 
     private void Start()
@@ -83,6 +84,8 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
+
+            ChracterManager.Instance.Player.conditions.DecreaseStamina(5f); //점프시 스태미너가 5씩 감소하도록 
         }
     }
     bool GroundCheck() // 플레이어의 위치로부터 받는 Ray를 통한 IsGrounded의 Bool값을 반환
