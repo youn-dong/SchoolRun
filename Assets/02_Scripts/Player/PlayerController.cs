@@ -117,4 +117,9 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+    //private void OnDrawGizmos()
+    //{
+    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    Debug.DrawRay(ray.origin,ray.direction*3,Color.white);
+    //}
 }

@@ -19,9 +19,6 @@ public class DoorController : MonoBehaviour, IInterEnvironment
 
         anim.SetBool("DoorOpen", isOpen);
         Debug.Log("문상태: " + (isOpen ? "열림" : "닫힘"));
-
-
-
     }
     public void OnInteractEnvironment()
     {

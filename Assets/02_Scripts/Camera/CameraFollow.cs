@@ -7,6 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Transform player;
     public Vector3 offset = new Vector3(0, -5f, -2);
     public float smoothSpeed = 5f;
+    public int fieldOfView = 110;
 
     private void LateUpdate()
     {
