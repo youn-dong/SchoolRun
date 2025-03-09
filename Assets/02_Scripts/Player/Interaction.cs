@@ -6,18 +6,18 @@ using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
+    [Header("상호작용")]
     public float checkRate = 0.05f; //Lay를 통해서 확인할 시간
-    private float lastCheckTime; 
+    private float lastCheckTime; //체크시간
     public float maxCheckDistance; //상호작용 최대 거리
     public LayerMask layerMask; //감지할 수 있는 레이어
-    public TextMeshProUGUI promptTxt;
-    public GameObject curInteractGameObject; 
+    public GameObject curInteractGameObject; //현재 상호작용중인 GameObject
 
-    [Header("소유아이템")]
-    private IInteractable curInteractable;
+    public TextMeshProUGUI promptTxt; //상호작용시 Text
 
-    [Header("환경아이템")]
-    private IInterEnvironment curEnvironment;
+    private IInteractable curInteractable; //상호작용 가능 가변(소유)아이템
+
+    private IInterEnvironment curEnvironment; //상호작용 가능 고정아이템
 
     // Update is called once per frame
     void Update()

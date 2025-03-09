@@ -6,24 +6,17 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed;
-    public float jumpForce = 20f;
+    public float moveSpeed; //움직임 속도
+    public float jumpForce = 20f; //기본점프력
     private Vector2 curMovementInput;
-    private Rigidbody _rigidbody;
-    public LayerMask groundLayerMask;
+    private Rigidbody _rigidbody; 
+    public LayerMask groundLayerMask; //Player가 확인 가능한 Ray
 
     private bool isGrounded;
 
-    [Header("Animation")]
     private Animator animator;
 
-    [Header("Look")]
-    public Transform cameraContainer;
-    public float minXLook;
-    public float maxXLook;
-    private float camCurXRot;
-    public float lookSensivity;
-
+    [Header("Player 좌,우 회전속도")]
     public float rotationSpeed;
 
     private Vector2 mouseDelta;
@@ -40,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = GroundCheck();
+        isGrounded = GroundCheck(); //Ray를 통한 계속적인 점프가능조건 체크
         animator.SetBool("Grounded", isGrounded);
     }
     void FixedUpdate() //물리연산은 FixedUpdate 생명주기함수에서 하는것이 유리.
@@ -48,15 +41,8 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    void Move()
+    void Move() //W,A,S,D키를 통한 Player 이동 구현
     {
-
-        // 1. 캐릭터 정지할때(캐릭터가 바라보고 있는 방향으로) 회전값
-        // 2. 캐릭터가 이동할 때 
-
-        //  Debug.Log(curMovementInput);
-        // Vector3 dir = transform.forward * curMovementInput;// .y + transform.right * curMovementInput.x;
-        // Vector3 dir = (transform.forward * curMovementInput.y+transform.right*curMovementInput.x).normalized;
         Vector3 dir = transform.forward * curMovementInput.y;
         dir *= moveSpeed;
         dir.y = _rigidbody.velocity.y; //점프시 중력을 유지해주기 위해서.
@@ -70,7 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.eulerAngles -= Time.deltaTime * rotationSpeed * Vector3.up;
         }
-        if (curMovementInput.y < 0.0f) // S 키 → 뒤로 이동 + 180도 회전
+        if (curMovementInput.y < 0.0f) // S 키를 통한 180도 회전
         {
             transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + 180, 0);
         }
@@ -99,7 +85,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
-    bool GroundCheck()
+    bool GroundCheck() // 플레이어의 위치로부터 받는 Ray를 통한 IsGrounded의 Bool값을 반환
     {
         Ray[] rays = new Ray[4]
         {
@@ -117,7 +103,7 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
-    //private void OnDrawGizmos()
+    //private void OnDrawGizmos() //Ray의 범위를 확인하기 위한 로직
     //{
     //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     //    Debug.DrawRay(ray.origin,ray.direction*3,Color.white);

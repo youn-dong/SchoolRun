@@ -11,6 +11,7 @@ public enum ConsumableType
 [Serializable]
 public class ItemDataConsumable
 {
+    [Header("Item 정보")]
     public ConsumableType consumableType;
     public float value;
 }

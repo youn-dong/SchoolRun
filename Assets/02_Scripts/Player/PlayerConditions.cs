@@ -9,6 +9,7 @@ public class PlayerConditions : MonoBehaviour
     Conditions hunger { get { return uicondition.hunger; } }
     Conditions stamina { get { return uicondition.stamina; } }
 
+    [Header("체력감소속도")]
     public float noHungerHealthDecay;
     // Start is called before the first frame update
     void Update()
