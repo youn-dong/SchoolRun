@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "c45f0765-cd57-4c59-80a4-99f939d0fb50",
-                    "expectedControlType": "Delta",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "cec7e4a7-3b9e-47a7-bfc0-21b24b6d2dce",
@@ -109,17 +100,6 @@
                 },
                 {
                     "name": "",
-                    "id": "ed89e1ce-5954-41dd-bd5a-cf0dd1ccdf90",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "7a8504cf-2735-4b0f-854d-acfede90fd23",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -143,7 +123,7 @@
                 {
                     "name": "",
                     "id": "0e1b9881-9dae-4569-ad85-aedd90a775e5",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

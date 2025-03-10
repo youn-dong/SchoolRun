@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player 좌,우 회전속도")]
     public float rotationSpeed;
+
+    public Action inventory;
 
     private Vector2 mouseDelta;
     private void Awake()
@@ -115,4 +118,12 @@ public class PlayerController : MonoBehaviour
     //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     //    Debug.DrawRay(ray.origin,ray.direction*3,Color.white);
     //}
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+        }
+    }
 }

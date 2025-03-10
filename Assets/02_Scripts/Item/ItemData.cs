@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ConsumableType
 {
@@ -11,7 +12,7 @@ public enum ConsumableType
 [Serializable]
 public class ItemDataConsumable
 {
-    [Header("Item 정보")]
+    [Header("Item 정보")] 
     public ConsumableType consumableType;
     public float value;
 }
@@ -21,7 +22,7 @@ public class ItemData : ScriptableObject
     [Header("Info")]
     public string ItemName;
     public string description;
-    public Mesh icon;
+    public Sprite icon;
     public GameObject dropPrefab;
 
     [Header("Stacking")]
