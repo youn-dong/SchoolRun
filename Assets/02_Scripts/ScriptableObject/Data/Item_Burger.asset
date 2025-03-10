@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: "\uD584\uBC84\uAC70"
   description: "\uCCB4\uB825\uACFC \uBC30\uACE0\uD514\uC744 \uCC44\uC6CC\uC90D\uB2C8\uB2E4."
-  icon: {fileID: -4101298594492280764, guid: 17bb0e13d90eb7540a9620e6f74bb614, type: 3}
+  iconMesh: {fileID: -4101298594492280764, guid: 17bb0e13d90eb7540a9620e6f74bb614, type: 3}
+  iconSpirte: {fileID: 0}
   dropPrefab: {fileID: 1765995492758009968, guid: cff631b005b811944a846f281776d825, type: 3}
   canStack: 1
   maxStackAmount: 5
