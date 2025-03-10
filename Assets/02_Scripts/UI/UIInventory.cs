@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ public class UIInventory : MonoBehaviour
     private PlayerConditions condition;
     private PlayerController controller;
 
+    ItemData selectedItem;
+    int selectedItemIndex = 0;
+
     void Start()
     {
         controller = ChracterManager.Instance.Player.controller;
@@ -31,6 +35,7 @@ public class UIInventory : MonoBehaviour
 
         inventoryWindow.SetActive(false);
         slots = new ItemSlot[slotPanel.childCount];
+        
 
         for(int i=0; i<slots.Length; i++)
         {
@@ -137,5 +142,62 @@ public class UIInventory : MonoBehaviour
     void ThrowItem(ItemData data) // 아이템 버릴 때 
     {
         Instantiate(data.dropPrefab,dropPosition.position,Quaternion.Euler(Vector3.one*Random.value*360));
+    }
+    public void SelectItem(int index)
+    {
+        if (slots[index].item == null) return;
+
+        selectedItem = slots[index].item;
+        selectedItemIndex = index;
+
+        selectedItemName.text = selectedItem.itemName;
+        selectedItemDescription.text = selectedItem.description;
+
+        selectedItemStatName.text = string.Empty;
+        selectedItemStatValue.text = string.Empty;
+
+        for(int i = 0; i<selectedItem.consumables.Length; i++)
+        {
+            selectedItemStatName.text += selectedItem.consumables[i].type.ToString() + "\n";
+            selectedItemStatValue.text += selectedItem.consumables[i].value.ToString() + "\n";
+        }
+        useButton.SetActive(selectedItem.type == ItemType.consumable);
+        dropButton.SetActive(true);
+    }
+    public void OnUseButton()
+    {
+        if (selectedItem.type == ItemType.consumable)
+        {
+            for (int i = 0; i < selectedItem.consumables.Length; i++)
+            {
+                switch (selectedItem.consumables[i].type)
+                {
+                    case ConsumableType.Health:
+                        condition.Heal(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.Hunger:
+                        condition.Eat(selectedItem.consumables[i].value);
+                        break;
+                }
+            }
+            RemoveSelectedItem();
+        }
+    }
+    public void OnDropButton()
+    {
+        ThrowItem(selectedItem);
+        RemoveSelectedItem();
+    }
+    void RemoveSelectedItem()
+    {
+        slots[selectedItemIndex].quantity--;
+        if (slots[selectedItemIndex].quantity<=0)
+        {
+            selectedItem = null;
+            slots[selectedItemIndex].item = null; 
+            selectedItemIndex = 1;
+            ClearSelectedItemInfo();
+        }
+        UpDateUI();
     }
 }

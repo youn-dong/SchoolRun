@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,13 @@ public class PlayerConditions : MonoBehaviour
         {
             Die();
         }
+    }
+    public void Heal(float amount)
+    {
+        health.Add(amount);
+    }
+    public void Eat(float amount)
+    {
     }
     public void DecreaseStamina(float amount)
     {

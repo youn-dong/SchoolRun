@@ -16,6 +16,7 @@ public class UICursor : MonoBehaviour
         {
             imageComponent.sprite = cursorImage;
         }
+        
     }
 
     // Update is called once per frame
