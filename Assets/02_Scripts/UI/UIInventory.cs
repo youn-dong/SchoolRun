@@ -161,12 +161,12 @@ public class UIInventory : MonoBehaviour
             selectedItemStatName.text += selectedItem.consumables[i].type.ToString() + "\n";
             selectedItemStatValue.text += selectedItem.consumables[i].value.ToString() + "\n";
         }
-        useButton.SetActive(selectedItem.type == ItemType.consumable);
+        useButton.SetActive(selectedItem.type == ItemType.Healthy);
         dropButton.SetActive(true);
     }
     public void OnUseButton()
     {
-        if (selectedItem.type == ItemType.consumable)
+        if (selectedItem.type == ItemType.Healthy)
         {
             for (int i = 0; i < selectedItem.consumables.Length; i++)
             {

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public enum ItemType
 {
-    consumable,
-    Resource
+    Healthy,
+    Poisonous
 }
 public enum ConsumableType
 {

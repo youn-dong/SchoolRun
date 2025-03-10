@@ -25,6 +25,10 @@ public class ItemObject : MonoBehaviour, IInteractable
         Debug.Log("상호작용중");
         ChracterManager.Instance.Player.itemData = data;
         ChracterManager.Instance.Player.addItem?.Invoke();
+        if(ChracterManager.Instance.Player.conditions != null)
+        {
+            ChracterManager.Instance.Player.conditions.TakeDamage(data);
+        }
         Destroy(gameObject);
     }
 }
