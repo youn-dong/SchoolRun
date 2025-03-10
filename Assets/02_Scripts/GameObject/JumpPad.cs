@@ -18,9 +18,9 @@ public class JumpPad : MonoBehaviour
                 {
                     ChracterManager.Instance.Player.conditions.health.SubStract(10f); //데미지 패드를 밟을 때마다 10의 체력을 감소시키기.
                 }
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 }

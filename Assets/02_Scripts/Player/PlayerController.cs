@@ -121,8 +121,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnInventory(InputAction.CallbackContext context)
     {
+        Debug.Log("인벤토리 Open");
         if(context.phase == InputActionPhase.Started)
         {
+            Debug.Log("잘 실행되고 있음.");
             inventory?.Invoke();
         }
     }
