@@ -76,6 +76,8 @@ public class UIInventory : MonoBehaviour
     {
         ItemData data = ChracterManager.Instance.Player.itemData; //아이템 데이터는 ChracterManager를 통해서 접근
 
+        if (data.type == ItemType.Poisonous) return; //독이 든 아이템은 인벤토리에 저장할 필요가 없으므로
+
         if(data.canStack) //아이템이 저장가능한 아이템이라면
         {
             ItemSlot slot = GetItemStack(data); //아이템 슬롯안에 스택할 수 있도록 데이터를 넘겨주고
@@ -125,7 +127,7 @@ public class UIInventory : MonoBehaviour
         }
         return null; //슬롯상 저장 공간이 없다면 null을 반환
     }
-    void UpDateUI() //UI 업데이트
+    public void UpDateUI() //UI 업데이트
     {
         for (int i = 0; i < slots.Length; i++)
         {
@@ -180,8 +182,9 @@ public class UIInventory : MonoBehaviour
                         break;
                 }
             }
-            RemoveSelectedItem();
         }
+        // 아이템 사용 후 즉시 인벤토리에서 제거
+        RemoveSelectedItem();
     }
     public void OnDropButton()
     {
@@ -190,6 +193,8 @@ public class UIInventory : MonoBehaviour
     }
     void RemoveSelectedItem()
     {
+        if (slots[selectedItemIndex] == null) return;
+
         slots[selectedItemIndex].quantity--;
         if (slots[selectedItemIndex].quantity<=0)
         {

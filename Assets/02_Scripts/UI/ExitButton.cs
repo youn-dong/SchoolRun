@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ExitButton : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class ExitButton : MonoBehaviour
 
     private void Start()
     {
-        gamePanel.SetActive(true);   
+        gamePanel.gameObject.SetActive(true);
     }
-    public void ExitGamePanel()
+    public void ClosePanel()
     {
         gamePanel.SetActive(false);
     }

@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public Action inventory;
 
     private Vector2 mouseDelta;
+    private ExitButton button;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -127,5 +128,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("잘 실행되고 있음.");
             inventory?.Invoke();
         }
+    }
+    public void ClosePanel(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        button.ClosePanel();
     }
 }
