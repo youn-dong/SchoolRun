@@ -22,13 +22,12 @@ public class PlayerController : MonoBehaviour
 
     public Action inventory;
 
-    private Vector2 mouseDelta;
+
     private ExitButton button;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
     }
 
     private void Start()
